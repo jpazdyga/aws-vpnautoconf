@@ -72,7 +72,7 @@ for tun in ipsec_tunnel:
  variables = [ourinternalip,oursubnet,theirsubnet,externalip,internalip]
  print("leftsubnet={0}/30,{1}\nright={3}\nrightsubnet={4}/30,{3}\nauto=start".format,variables)
  file = open(configfile, 'a')
- file.write("\nconn aws-" + aws + "\n\tleftsubnet=" + ourinternalip + "/30,", oursubnet, "\n\tright=" + externalip + "\n\trightsubnet=" + internalip + "/30,", theirsubnet, "\n\tauto=start\n")
+ file.write("\nconn aws-" + aws + "\n\tleftsubnet=" + ourinternalip + "/30," + oursubnet + "\n\tright=" + externalip + "\n\trightsubnet=" + internalip + "/30," + theirsubnet + "\n\tauto=start\n")
  file.close()
 
 scparray.append(secretfile)
@@ -85,7 +85,7 @@ for cnf in scparray:
  buildpath = (remotepath, "/", cnf)
  remotepath = s.join(buildpath)
  print("Config file to be transfered: ", localpath);
- print("Destination on ", server, ": ", remotepath);
+ print("Destination on ", ourvpngw, ": ", remotepath);
  
  ssh = SSHClient()
  ssh.load_system_host_keys()
