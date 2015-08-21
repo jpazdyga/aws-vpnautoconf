@@ -11,4 +11,8 @@ c = boto.vpc.connect_to_region("eu-west-1")
 c.delete_vpn_connection(givenid)
 
 vpns = c.get_all_vpn_connections()
-print vpns;
+for i in vpns:
+ vpnid = i.id
+ state = i.state
+ if state != "deleted":
+  print (vpnid, ": ", state);

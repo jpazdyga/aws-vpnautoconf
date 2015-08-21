@@ -1,22 +1,35 @@
 #!/usr/bin/python
 
 import boto
+import time
 from boto.vpc import VPCConnection
 outnetcidr="10.20.30.0/24"
 cgw="cgw-a3dfeed7"
 vgw="vgw-6a0b3a1e"
 
+def newroutadd():
+ addroute = c.create_vpn_connection_route(outnetcidr, vpnid)
+ print(addroute)
+
+def availwait():
+ for i in vpns:
+  state = i.state
+  if state != "available":
+   time.sleep(10)
+   availwait()
+  else:
+   newroutadd()
+
 def get():
  for i in vpns:
- print(i)
   vpnid = i.id
   state = i.state
   tunnels = i.tunnels
  if state != "deleted":
-  print (vpnid, state, tunnels);
+  print(vpnid, state, tunnels)
+  print(routeflag)
   if routeflag == "1":
-   addroute = c.create_vpn_connection_route(outnetcidr, vpnid)
-   print addroute;
+   availwait()
    exit()
   else:
    exit()
