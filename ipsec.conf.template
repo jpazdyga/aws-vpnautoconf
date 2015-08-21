@@ -1,0 +1,23 @@
+config setup
+        strictcrlpolicy=no
+        charondebug="ike 1, knl 2, cfg 2, enc 1, mgr 1, net 1"
+
+conn %default
+        ikelifetime=28800s
+        keylife=3600s
+        rekeymargin=3m
+        keyingtries=3
+        authby=secret
+        mobike=no
+        esp=aes128-sha1-modp1024!
+        ike=aes128-sha1-modp1024!
+        ## phase 1 ##
+        keyexchange=ikev1
+        ## phase 2 ##
+        installpolicy=yes
+        compress=no
+        type=tunnel
+        aggressive=no
+        dpddelay=10
+        dpdaction=restart
+        left=10.20.30.40
